@@ -23,7 +23,7 @@ object CommonUtils {
         return true;
     }
 
-    private fun String.validateUTF8String(): Boolean {
+    fun String.validateUTF8String(): Boolean {
         this.forEachIndexed { i, c ->
             if (c.toString() == "\u0000") {
                 return false;

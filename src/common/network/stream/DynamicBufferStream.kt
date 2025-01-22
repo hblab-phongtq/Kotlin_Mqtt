@@ -4,20 +4,52 @@ class DynamicBufferStream : InputStream, OutputStream {
     private var writePosition = 0
     private var readCounter = 0
     private var lastReadComplete = 0
-    private var array : UByteArray = UByteArray(32)
+    private var array: UByteArray = UByteArray(32)
+
+    private fun ensureCapacity(length: Int) {
+        if (writePosition + length > array.size)
+            array = array.copyOf(array.size + (length * 2))
+    }
+
     override fun read(): UByte {
-        TODO("Not yet implemented")
+        if (readCounter >= writePosition)
+            throw Exception()
+        return array[readCounter++]
     }
 
     override fun readBytes(length: Int): UByteArray {
-        TODO("Not yet implemented")
+        val endIndex = readCounter + length
+        if (endIndex > writePosition)
+            throw Exception()
+        val data = array.copyOfRange(readCounter, endIndex)
+        readCounter = endIndex
+        return data
+    }
+
+    public fun clearReadCounter() {
+        readCounter = lastReadComplete
+    }
+
+    public fun shift() {
+        if (readCounter == writePosition) {
+            writePosition = 0
+            readCounter = 0
+        }
+        lastReadComplete = readCounter
     }
 
     override fun write(b: UByte) {
-        TODO("Not yet implemented")
+        ensureCapacity(1)
+        array[writePosition++] = b
+    }
+
+    private fun write(b: UByteArray, off: Int, len: Int) {
+        ensureCapacity(len)
+        array = b.copyInto(array, writePosition, off, len)
+        writePosition += len
     }
 
     override fun write(b: UByteArray) {
-        TODO("Not yet implemented")
+        write(b, 0, b.size)
     }
 }

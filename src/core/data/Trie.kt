@@ -106,8 +106,21 @@ class Trie(subcription: Map<String, Subcription>? = null) {
         index: Int,
         clientId: String
     ): Boolean {
-
-        return true
+        val character = topic.getOrNull(index)
+        val childNode = node.children[character]
+        if (childNode != null) {
+            val result = _delete(childNode, topic, index + 1, clientId)
+            if (result && childNode.children.isEmpty() && childNode.subcription.isEmpty()) {
+                node.children.remove(character!!)
+            }
+            return result
+        } else {
+            if (topic.length == index) {
+                node.subcription.remove(clientId)
+                return true
+            }
+        }
+        return false
     }
 
     fun deleteWithCLientId(clientId: String) {
@@ -116,8 +129,16 @@ class Trie(subcription: Map<String, Subcription>? = null) {
         __delete(root, clientId)
     }
 
-    private fun __delete(root: TrieNode, clientId: String) {
-
+    private fun __delete(node: TrieNode, clientId: String) {
+        node.subcription.remove(clientId)
+        val iterator = node.children.iterator()
+        while (iterator.hasNext()) {
+            val child = iterator.next()
+            __delete(child.value, clientId)
+            if (child.value.children.isEmpty() && child.value.subcription.isEmpty()) {
+                iterator.remove()
+            }
+        }
     }
 
     class TrieNode(
