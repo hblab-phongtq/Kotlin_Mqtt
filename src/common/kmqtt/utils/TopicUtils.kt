@@ -19,9 +19,12 @@ object TopicUtils {
                 if(this[i] == '+') {
                     val previousCharacter = this.getOrNull(i - 1)
                     val nextCharacter = this.getOrNull(i + 1)
-                    if (((previousCharacter == '/' || previousCharacter == null)
-                                && (nextCharacter == '/' || nextCharacter == null)))
+                    if(previousCharacter == null || previousCharacter != '/')
                         return false
+                    if(nextCharacter != null) {
+                        if( nextCharacter != '/')
+                            return false
+                    }
                 }
             }
         }
@@ -35,7 +38,7 @@ object TopicUtils {
         if (!this.isValidTopic() || !wildCardTopic.isValidTopic()) {
             return false
         }
-        if (wildCardTopic.contains("+") || wildCardTopic.contains("#") || this.contains("$")) {
+        if (!wildCardTopic.contains("+") || !wildCardTopic.contains("#") || this.contains("$")) {
             return false
         }
         if (this == wildCardTopic) {

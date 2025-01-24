@@ -1,8 +1,8 @@
 package common.kmqtt.utils
 
-import common.kmqtt.model.KMqttProperties
-import common.kmqtt.model.PacketType
-import common.kmqtt.model.Property
+import common.kmqtt.model.v.KMqttProperties
+import common.kmqtt.model.v.PacketType
+import common.kmqtt.model.v.Property
 import common.network.stream.ByteArrayOutputStream
 import common.network.stream.StreamDataExtension.encodeVariableByteInteger
 import common.utils.CommonUtils.validateUTF8String

@@ -1,8 +1,8 @@
 package common.kmqtt.utils
 
-import common.kmqtt.model.KMqttPacket
-import common.kmqtt.model.KMqttProperties
-import common.kmqtt.model.Property
+import common.kmqtt.model.v.KMqttPacket
+import common.kmqtt.model.v.KMqttProperties
+import common.kmqtt.model.v.Property
 import common.kmqtt.utils.TopicUtils.containsWildCard
 import common.network.stream.ByteArrayInputStream
 import common.network.stream.StreamDataExtension.decodeVariableByteInteger

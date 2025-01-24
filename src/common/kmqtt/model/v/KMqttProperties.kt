@@ -1,4 +1,4 @@
-package common.kmqtt.model
+package common.kmqtt.model.v
 
 class KMqttProperties(
     var payloadFormatIndicator: UInt? = null,

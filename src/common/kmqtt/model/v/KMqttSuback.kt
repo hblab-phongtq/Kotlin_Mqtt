@@ -1,4 +1,4 @@
-package common.kmqtt.model
+package common.kmqtt.model.v
 
 class KMqttSuback(
     val pktId : Int,

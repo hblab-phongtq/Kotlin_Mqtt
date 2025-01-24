@@ -1,4 +1,4 @@
-package common.kmqtt.model
+package common.kmqtt.model.v
 
 class KMqttPublish(
     val pktId : Int,

@@ -1,5 +1,7 @@
 package common.kmqtt.model
 
+import common.kmqtt.model.v.QoSLevel
+
 data class SubcriptionOptions(
     val qos : QoSLevel = QoSLevel.AT_MOST_ONCE,
     val noLocal : Boolean = false,

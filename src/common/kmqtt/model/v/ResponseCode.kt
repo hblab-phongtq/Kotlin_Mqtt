@@ -1,4 +1,4 @@
-package common.kmqtt.model
+package common.kmqtt.model.v
 
 enum class PackingErrorCode( val value: Int) {
     // Packing/Unpacking error codes

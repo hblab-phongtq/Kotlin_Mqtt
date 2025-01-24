@@ -1,9 +1,8 @@
-package common.kmqtt.model
+package common.kmqtt.model.v
 
-class KMqttSubcribe(
+class KMqttUnsubcribe(
     val pktId : Int,
     val tuplesLen : Int,
-    val qos : Int,
     val topicLen : Int,
     val topic : String,
 )
